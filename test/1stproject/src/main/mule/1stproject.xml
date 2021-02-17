@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ffde4707-02cf-449b-af9c-863362541bce" basePath="1stmule" >
+		<http:listener-connection host="0.0.0.0" port="9998" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="e9463824-67c4-4194-9da4-02c107f1575d" basePath="newfiles" >
+		<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<flow name="1stprojectFlow" doc:id="3b96003b-096b-4979-98a4-ae03dc1742be" >
+		<http:listener doc:name="Listener" doc:id="841bc2d1-be0e-4cf6-8363-e226f47d2dbd" config-ref="HTTP_Listener_config1" path="1stmule" allowedMethods="GET" responseStreamingMode="ALWAYS">
+			<non-repeatable-stream />
+			<reconnect />
+		</http:listener>
+		<set-payload value="1st Mule Application" doc:name="Set Payload" doc:id="e4a759ba-765a-4652-b765-be1c3a2dd34d" />
+	</flow>
+</mule>
